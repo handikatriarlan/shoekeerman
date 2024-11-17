@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +59,7 @@ class AuthController extends Controller
             return redirect()->back()
                 ->with('error', 'An error occurred during registration. Please try again later.')
                 ->withInput($request->except(['password', 'password_confirmation']));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error('General error during registration: ' . $e->getMessage());
 
