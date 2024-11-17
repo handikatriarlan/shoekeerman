@@ -18,30 +18,48 @@
 
             <div
                 class="bg-card p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-sm border border-gray-100">
-                <form class="space-y-6">
+                <form class="space-y-6" action="{{ route('register.post') }}" method="POST">
+                    @csrf
                     <div>
-                        <input id="name" type="text" placeholder="Full Name" class="input-field" required>
-                    </div>
-
-                    <div>
-                        <input id="email" type="email" placeholder="Email Address" class="input-field" required>
-                    </div>
-
-                    <div>
-                        <input id="phone" type="tel" placeholder="Phone Number" class="input-field" required>
-                    </div>
-
-                    <div>
-                        <textarea id="address" placeholder="Address" class="input-field" rows="3" required></textarea>
-                    </div>
-
-                    <div>
-                        <input id="password" type="password" placeholder="Password" class="input-field" required>
-                    </div>
-
-                    <div>
-                        <input id="password_confirmation" type="password" placeholder="Confirm Password" class="input-field"
+                        <input id="name" name="name" type="text" placeholder="Full Name" class="input-field"
                             required>
+                        @error('name')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <input id="email" name="email" type="email" placeholder="Email Address" class="input-field"
+                            required>
+                        @error('email')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <input id="phone" name="phone" type="tel" placeholder="Phone Number" class="input-field"
+                            required>
+                        @error('phone')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <textarea id="address" name="address" placeholder="Address" class="input-field" rows="3" required></textarea>
+                        @error('address')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <input id="password" name="password" type="password" placeholder="Password" class="input-field"
+                            required>
+                        @error('password')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <input id="password_confirmation" name="password_confirmation" type="password"
+                            placeholder="Confirm Password" class="input-field" required>
+                        @error('password_confirmation')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <button class="w-full py-4 px-6 rounded-xl btn-primary font-medium">
