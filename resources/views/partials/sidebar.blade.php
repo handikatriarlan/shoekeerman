@@ -28,7 +28,7 @@
                     <p class="px-3 text-uppercase small fw-medium mb-2 text-secondary sidebar-text">Catalog Management
                     </p>
 
-                    <a href=""
+                    <a href="{{ route('admin.categories.index') }}"
                         class="nav-link d-flex align-items-center gap-2 px-3 py-2 rounded-2 {{ request()->routeIs('admin.categories.*') ? 'active-nav' : 'text-secondary hover-nav' }}">
                         <i class="bi bi-collection-fill"></i>
                         <span class="sidebar-text">Categories</span>
