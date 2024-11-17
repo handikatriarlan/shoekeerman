@@ -5,6 +5,19 @@
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gradient-custom">
         <div class="w-full max-w-md mx-auto p-6">
+            <!-- Alert Messages -->
+            @if (session('success'))
+                <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="mb-12 text-center">
                 <div
                     class="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center">
@@ -18,15 +31,25 @@
 
             <div
                 class="bg-card p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-sm border border-gray-100">
-                <form class="space-y-6" action="{{ route('auth.login') }}" method="POST">
+                <form class="space-y-6" action="{{ route('login.post') }}" method="POST">
                     @csrf
-                    <div class="space-y-2">
-                        <input type="email" name="email" placeholder="Enter your email" class="input-field" required>
+
+                    <!-- Email Input -->
+                    <div>
+                        <input id="email" name="email" type="email" placeholder="Enter your email"
+                            class="input-field @error('email') border-red-500 @enderror" value="{{ old('email') }}"
+                            required>
+                        @error('email')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <div class="space-y-2">
-                        <input type="password" name="password" placeholder="Enter your password" class="input-field"
-                            required>
+                    <div>
+                        <input id="password" name="password" type="password" placeholder="Enter your password"
+                            class="input-field @error('password') border-red-500 @enderror" required>
+                        @error('password')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex items-center">
@@ -48,3 +71,22 @@
         </div>
     </div>
 @endsection
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<script>
+    function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(inputId + '-icon');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        }
+    }
+</script>

@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Route;
 //Landing Page Routes
 Route::get('/', function () {
     return view('landing.landing-page');
-})->name('home');
+})->name('home')->middleware('auth');
+
 
 Route::get('/cart', function () {
     return view('landing.shopping-cart');
 })->name('cart');
 
 //Auth Routes
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/login', [AuthController::class, 'showloginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');

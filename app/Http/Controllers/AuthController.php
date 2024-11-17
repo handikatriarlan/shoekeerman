@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -65,5 +66,31 @@ class AuthController extends Controller
                 ->with('error', 'An unexpected error occurred. Please contact support.')
                 ->withInput($request->except(['password', 'password_confirmation']));
         }
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Invalid email format.',
+            'password.min' => 'Password must be at least 8 characters.',
+            'password.required' => 'Password is required.',
+        ]);
+
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
+            $user = Auth::user();
+            $redirectTo = $user->role === 'admin' ? route('admin.dashboard') : route('home');
+
+            return redirect()->intended($redirectTo)
+                ->with('success', 'Login successful.');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 }
