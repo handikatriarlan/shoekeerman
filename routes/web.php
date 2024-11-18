@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 //Landing Page Routes
 Route::get('/', function () {
     return view('landing.landing-page');
-})->name('home')->middleware('auth');
+})->name('home');
 
 
 Route::get('/cart', function () {
