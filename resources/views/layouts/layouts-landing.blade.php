@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') - {{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/img/logo.png') }}" type="image/x-icon">
     @vite(['resources/js/app.js'])
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
@@ -21,7 +22,7 @@
                 <i class='bx bxs-grid'></i>
             </div>
 
-            <a href="{{route('home')}}" class="nav__logo">Shoekeerman</a>
+            <a href="{{ route('home') }}" class="nav__logo">Shoekeerman</a>
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
