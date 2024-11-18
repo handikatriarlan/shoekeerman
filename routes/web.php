@@ -12,6 +12,9 @@ Route::get('/', function () {
     return view('landing.landing-page');
 })->name('home');
 
+Route::get('/shop', function () {
+    return view('landing.shop');
+})->name('shop');
 
 Route::get('/cart', function () {
     return view('landing.shopping-cart');
