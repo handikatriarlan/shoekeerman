@@ -34,8 +34,8 @@
                         <span class="sidebar-text">Categories</span>
                     </a>
 
-                    <a href="{{ route('admin.products') }}"
-                        class="nav-link d-flex align-items-center gap-2 px-3 py-2 rounded-2 {{ request()->routeIs('admin.products') ? 'active-nav' : 'text-secondary hover-nav' }}">
+                    <a href="{{ route('admin.products.index') }}"
+                        class="nav-link d-flex align-items-center gap-2 px-3 py-2 rounded-2 {{ request()->routeIs('admin.products.*') ? 'active-nav' : 'text-secondary hover-nav' }}">
                         <i class="bi bi-box-seam-fill"></i>
                         <span class="sidebar-text">Products</span>
                     </a>
@@ -44,7 +44,7 @@
                 <div class="mt-4">
                     <p class="px-3 text-uppercase small fw-medium mb-2 text-secondary sidebar-text">Sales & Orders</p>
 
-                    <a href=""
+                    <a href="{{ route('admin.orders.index') }}"
                         class="nav-link d-flex align-items-center gap-2 px-3 py-2 rounded-2 {{ request()->routeIs('admin.orders.*') ? 'active-nav' : 'text-secondary hover-nav' }}">
                         <i class="bi bi-cart-check-fill"></i>
                         <span class="sidebar-text">Orders</span>
