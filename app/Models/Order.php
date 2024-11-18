@@ -31,7 +31,7 @@ class Order extends Model
      * Generate order code
      * Using database transaction and timestamp to ensure unique code
      */
-    public static function generateOrderCode(): string
+    public static function generateOrderCode()
     {
         return DB::transaction(function () {
             $prefix = 'ORDE';
