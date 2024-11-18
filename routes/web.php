@@ -48,26 +48,23 @@ Route::prefix('categories')->group(function () {
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('admin.products.index');
     Route::post('/', [ProductController::class, 'store'])->name('admin.products.store');
-    Route::put('/{category}', [ProductController::class, 'update'])->name('admin.products.update');
-    Route::delete('/{category}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+    Route::put('/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 });
 
 // Users Management
 Route::prefix('users')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
-    Route::delete('/{category}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::delete('/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 // Order
 Route::prefix('orders')->group(function () {
     Route::get('/', [OrdersController::class, 'index'])->name('admin.orders.index');
     // Route::post('/', [OrdersController::class, 'store'])->name('admin.orders.store');
-    // Route::put('/{category}', [OrdersController::class, 'update'])->name('admin.orders.update');
-    // Route::delete('/{category}', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
+    Route::patch('/{order}/status', [OrdersController::class, 'updateStatus'])->name('admin.orders.update-status ');
+    // Route::delete('/{order}', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
 });
 
 
 // Order History
-
-
-
