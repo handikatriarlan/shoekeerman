@@ -26,17 +26,9 @@
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="{{ route('home') }}#home" class="nav__link active">Home</a></li>
-                    <li class="nav__item"><a href="{{ route('home') }}#featured" class="nav__link">Featured</a></li>
-                    <li class="nav__item"><a href="{{ route('home') }}#women" class="nav__link">Women</a></li>
-                    <li class="nav__item"><a href="{{ route('home') }}#new" class="nav__link">New</a></li>
+                    <li class="nav__item"><a href="{{ route('home') }}" class="nav__link active">Home</a></li>
                     <li class="nav__item"><a href="{{ route('shop') }}" class="nav__link">Shop</a></li>
                     <li class="nav__item"><a href="{{ route('cart') }}" class="nav__link">Cart</a></li>
-                </ul>
-            </div>
-
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
                     <li class="nav__item"><a href="{{ route('login') }}" class="nav__link">Login</a></li>
                     <li class="nav__item"><a href="{{ route('register') }}" class="nav__link">Register</a></li>
                 </ul>
@@ -60,10 +52,10 @@
             <div class="footer__box">
                 <h3 class="footer__title">EXPLORE</h3>
                 <ul>
-                    <li><a href="#home" class="footer__link">Home</a></li>
-                    <li><a href="#featured" class="footer__link">Featured</a></li>
-                    <li><a href="#women" class="footer__link">Women</a></li>
-                    <li><a href="#new" class="footer__link">New</a></li>
+                    <li><a href="{{ route('home') }}#home" class="footer__link">Home</a></li>
+                    <li><a href="{{ route('home') }}#featured" class="footer__link">Featured</a></li>
+                    <li><a href="{{ route('home') }}#women" class="footer__link">Women</a></li>
+                    <li><a href="{{ route('home') }}#new" class="footer__link">New</a></li>
                 </ul>
             </div>
 
