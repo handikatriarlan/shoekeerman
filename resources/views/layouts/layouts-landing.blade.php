@@ -75,7 +75,7 @@
                 <a href="#" class="footer__social"><i class='bx bxl-google'></i></a>
             </div>
         </div>
-        <p class="footer__copy">&#169; 2020 Bedimcode. All right reserved</p>
+        <p class="footer__copy">&copy; {{ date('Y') }} Shoekeerman. All rights reserved.</p>
     </footer>
 
     <!--===== MAIN JS =====-->
