@@ -3,90 +3,82 @@
 @section('title', 'Login')
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center bg-gradient-custom">
-        <div class="w-full max-w-md mx-auto p-6">
-            <!-- Alert Messages -->
-            @if (session('success'))
-                <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg">
-                    {{ session('success') }}
-                </div>
-            @endif
+    <section class="auth">
+        <div class="auth__container">
+            <div class="auth__card">
+                <a href="{{ route('home') }}" class="auth__back">
+                    <i class='bx bx-arrow-back'></i>
+                    <span>Back to Home</span>
+                </a>
 
-            @if (session('error'))
-                <div class="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg">
-                    {{ session('error') }}
-                </div>
-            @endif
 
-            <div class="mb-12 text-center">
-                <div
-                    class="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m-8-6h16"></path>
-                    </svg>
+                <div class="auth__header">
+                    <h1>Welcome Back</h1>
+                    <p>Sign in to continue shopping</p>
                 </div>
-                <h2 class="text-3xl font-bold text-primary">Welcome Back</h2>
-                <p class="text-secondary mt-2">Sign in to continue shopping</p>
-            </div>
 
-            <div
-                class="bg-card p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-sm border border-gray-100">
-                <form class="space-y-6" action="{{ route('login.post') }}" method="POST">
+                <form method="POST" action="{{ route('login') }}" class="auth__form">
                     @csrf
 
-                    <!-- Email Input -->
-                    <div>
-                        <input id="email" name="email" type="email" placeholder="Enter your email"
-                            class="input-field @error('email') border-red-500 @enderror" value="{{ old('email') }}"
-                            required>
+                    <div class="form__group">
+                        <div class="form__input-wrapper {{ $errors->has('email') ? 'error' : '' }}">
+                            <i class='bx bx-envelope'></i>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                                autocomplete="email" placeholder=" ">
+                            <label for="email">Email Address</label>
+                        </div>
                         @error('email')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            <span class="form__error">
+                                <i class='bx bx-error-circle'></i>
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
 
-                    <div>
-                        <input id="password" name="password" type="password" placeholder="Enter your password"
-                            class="input-field @error('password') border-red-500 @enderror" required>
+                    <div class="form__group">
+                        <div class="form__input-wrapper {{ $errors->has('password') ? 'error' : '' }}">
+                            <i class='bx bx-lock-alt'></i>
+                            <input type="password" id="password" name="password" required placeholder=" ">
+                            <label for="password">Password</label>
+                            <button type="button" class="form__toggle-password">
+                                <i class='bx bx-hide'></i>
+                            </button>
+                        </div>
                         @error('password')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            <span class="form__error">
+                                <i class='bx bx-error-circle'></i>
+                                {{ $message }}
+                            </span>
                         @enderror
                     </div>
 
-                    <div class="flex items-center">
-                        <input type="checkbox"
-                            class="w-5 h-5 border-2 border-gray-300 rounded-lg text-emerald-500 focus:ring-emerald-500 mr-3">
-                        <span class="text-sm text-secondary select-none">Keep me signed in</span>
+                    <div class="form__options">
+                        <label class="form__checkbox">
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <span class="checkmark"></span>
+                            <span class="label-text">Remember me</span>
+                        </label>
+
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="form__forgot">
+                                Forgot Password?
+                            </a>
+                        @endif
                     </div>
 
-                    <button class="w-full py-4 px-6 rounded-xl btn-primary font-medium">
-                        Sign in
-                    </button>
+                    <div class="form__actions">
+                        <button type="submit" class="form__button form__button--primary">
+                            <span>Sign In</span>
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+
+                        <p class="register__login">
+                            Don't have an account?
+                            <a href="{{ route('register') }}" class="register__login-link">Sign Up</a>
+                        </p>
+                    </div>
                 </form>
             </div>
-
-            <p class="mt-8 text-center text-secondary">
-                Don't have an account?
-                <a href="{{ route('register') }}" class="text-accent font-medium hover:text-emerald-700">Create Account</a>
-            </p>
         </div>
-    </div>
+    </section>
 @endsection
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-<script>
-    function togglePassword(inputId) {
-        const input = document.getElementById(inputId);
-        const icon = document.getElementById(inputId + '-icon');
-
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.remove('bi-eye-slash');
-            icon.classList.add('bi-eye');
-        } else {
-            input.type = 'password';
-            icon.classList.remove('bi-eye');
-            icon.classList.add('bi-eye-slash');
-        }
-    }
-</script>

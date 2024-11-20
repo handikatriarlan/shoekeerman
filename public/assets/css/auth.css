@@ -1,0 +1,347 @@
+/* Auth Pages Styles */
+:root {
+    --primary-color: #1e1e22ff;
+    --primary-hover: #18181aff;
+    --secondary-color: #f8f9fa;
+    --text-color: #2d3748;
+    --text-muted: #718096;
+    --error-color: #e53e3e;
+    --border-color: #e2e8f0;
+    --input-bg: #f8fafc;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --transition: all 0.3s ease;
+}
+
+.auth {
+    min-height: calc(100vh - var(--header-height));
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f6f6f6 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+}
+
+.auth__container {
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.auth__card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--card-shadow);
+    position: relative;
+}
+
+.auth__back {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.auth__back:hover {
+    color: var(--primary-color);
+    transform: translateX(-4px);
+}
+
+.auth__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth__header h1 {
+    font-size: 1.875rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.auth__header p {
+    color: var(--text-muted);
+    font-size: 0.975rem;
+}
+
+/* Form Styles */
+.auth__form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form__group {
+    position: relative;
+    margin: 5px 0;
+}
+
+.form__input-wrapper {
+    position: relative;
+}
+
+.form__input-wrapper input {
+    width: 84%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid var(--border-color);
+    border-radius: 1rem;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.975rem;
+    transition: var(--transition);
+}
+
+.form__input-wrapper input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    outline: none;
+}
+
+.form__input-wrapper i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.form__input-wrapper input:focus ~ i {
+    color: var(--primary-color);
+}
+
+.form__input-wrapper label {
+    position: absolute;
+    left: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.975rem;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.form__input-wrapper input:focus ~ label,
+.form__input-wrapper input:not(:placeholder-shown) ~ label {
+    top: -0.5rem;
+    left: 1rem;
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+    background: #ffffff;
+    color: var(--primary-color);
+}
+
+.form__toggle-password {
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: var(--transition);
+}
+
+.form__toggle-password:hover {
+    color: var(--primary-color);
+}
+
+/* Error States */
+.form__input-wrapper.error input {
+    border-color: var(--error-color);
+}
+
+.form__error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
+
+.form__error i {
+    font-size: 1rem;
+}
+
+/* Checkbox Styles */
+.form__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.form__checkbox input {
+    display: none;
+}
+
+.checkmark {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.375rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.form__checkbox input:checked ~ .checkmark {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkmark:after {
+    content: "\2713"; /* Tanda centang Unicode */
+    font-family: inherit; /* Gunakan font bawaan */
+    position: absolute;
+    color: white;
+    font-size: 0.875rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form__checkbox input:checked ~ .checkmark:after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.label-text {
+    font-size: 0.875rem;
+    color: var(--text-color);
+}
+
+/* Form Options */
+.form__options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -0.5rem 0;
+}
+
+.form__forgot {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.form__forgot:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Buttons */
+.form__actions {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.form__button {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form__button--primary {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.form__button--primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.form__button--secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.form__button--secondary:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.form__button i {
+    font-size: 1.25rem;
+    transition: var(--transition);
+}
+
+.form__button:hover i {
+    transform: translateX(4px);
+}
+
+/* Links */
+.form__link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.form__link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Terms */
+.form__terms {
+    margin-top: -0.5rem;
+}
+
+.form__terms.error .label-text {
+    color: var(--error-color);
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+    .auth__card {
+        padding: 2rem 1.5rem;
+    }
+
+    .form__options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+.register__login {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.register__login-link {
+    color: var(--primary-color);
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.register__login-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
