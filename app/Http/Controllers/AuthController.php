@@ -94,4 +94,22 @@ class AuthController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+
+    public function logout(Request $request)
+    {
+        try {
+            Auth::logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('home')
+                ->with('success', 'Logout successful.');
+        } catch (Exception $e) {
+            Log::error('Error during logout: ' . $e->getMessage());
+
+            return redirect()->back()
+                ->with('error', 'An error occurred while logging out. Please try again later.');
+        }
+    }
 }
