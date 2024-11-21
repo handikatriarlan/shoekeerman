@@ -12,7 +12,7 @@
                 </a>
 
                 <div class="auth__header">
-                    <h1>Create Account</h1>
+                    <h1>Register</h1>
                     <p>Join us for exclusive offers and updates</p>
                 </div>
 
@@ -84,13 +84,13 @@
 
                     <div class="form__actions">
                         <button type="submit" class="form__button form__button--primary">
-                            <span>Create Account</span>
+                            <span>Register</span>
                             <i class='bx bx-user-plus'></i>
                         </button>
 
                         <p class="register__login">
                             Already have an account?
-                            <a href="{{ route('login') }}" class="register__login-link">Sign In</a>
+                            <a href="{{ route('login') }}" class="register__login-link">Login</a>
                         </p>
                     </div>
                 </form>

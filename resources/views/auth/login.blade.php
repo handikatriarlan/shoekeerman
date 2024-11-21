@@ -31,7 +31,7 @@
                             </ul>
                         </div>
                     @endif
-                    
+
                     <div class="form__group">
                         <div class="form__input-wrapper">
                             <i class='bx bx-envelope'></i>
@@ -58,23 +58,17 @@
                             <span class="checkmark"></span>
                             <span class="label-text">Remember me</span>
                         </label>
-
-                        @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="form__forgot">
-                                Forgot Password?
-                            </a>
-                        @endif
                     </div>
 
                     <div class="form__actions">
                         <button type="submit" class="form__button form__button--primary">
-                            <span>Sign In</span>
+                            <span>Login</span>
                             <i class='bx bx-right-arrow-alt'></i>
                         </button>
 
                         <p class="register__login">
                             Don't have an account?
-                            <a href="{{ route('register') }}" class="register__login-link">Sign Up</a>
+                            <a href="{{ route('register') }}" class="register__login-link">Register</a>
                         </p>
                     </div>
                 </form>
