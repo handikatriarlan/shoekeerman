@@ -26,11 +26,47 @@
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="{{ route('home') }}" class="nav__link active">Home</a></li>
-                    <li class="nav__item"><a href="{{ route('shop') }}" class="nav__link">Shop</a></li>
-                    <li class="nav__item"><a href="{{ route('cart') }}" class="nav__link">Cart</a></li>
-                    <li class="nav__item"><a href="{{ route('login') }}" class="nav__link">Login</a></li>
-                    <li class="nav__item"><a href="{{ route('register') }}" class="nav__link">Register</a></li>
+                    <li class="nav__item">
+                        <a href="{{ route('home') }}"
+                            class="nav__link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{{ route('shop') }}"
+                            class="nav__link {{ request()->routeIs('shop') ? 'active' : '' }}">Shop</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="{{ route('cart') }}"
+                            class="nav__link {{ request()->routeIs('cart') ? 'active' : '' }}">Cart</a>
+                    </li>
+
+                    @guest
+                        <li class="nav__item">
+                            <a href="{{ route('login') }}"
+                                class="nav__link {{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="{{ route('register') }}"
+                                class="nav__link {{ request()->routeIs('register') ? 'active' : '' }}">Register</a>
+                        </li>
+                    @endguest
+
+                    @auth
+                        @if (Auth::user()->role === 'admin')
+                            <li class="nav__item">
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="nav__link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
+                            </li>
+                        @endif
+                        <li class="nav__item">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            <a href="#" class="nav__link"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </nav>
