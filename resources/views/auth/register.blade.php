@@ -51,6 +51,24 @@
                     </div>
 
                     <div class="form__group">
+                        <div class="form__input-wrapper {{ $errors->has('phone') ? 'error' : '' }}">
+                            <i class='bx bx-phone'></i>
+                            <input type="text" id="phone" name="phone" value="{{ old('phone') }}" required
+                                autocomplete="phone" placeholder=" ">
+                            <label for="phone">Phone Number</label>
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <div class="form__input-wrapper {{ $errors->has('address') ? 'error' : '' }}">
+                            <i class='bx bx-home'></i>
+                            <input type="text" id="address" name="address" value="{{ old('address') }}" required
+                                autocomplete="address" placeholder=" ">
+                            <label for="address">Address</label>
+                        </div>
+                    </div>
+
+                    <div class="form__group">
                         <div class="form__input-wrapper {{ $errors->has('password') ? 'error' : '' }}">
                             <i class='bx bx-lock-alt'></i>
                             <input type="password" id="password" name="password" required placeholder=" ">
