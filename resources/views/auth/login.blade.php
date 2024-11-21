@@ -11,32 +11,38 @@
                     <span>Back to Home</span>
                 </a>
 
-
                 <div class="auth__header">
                     <h1>Welcome Back</h1>
                     <p>Sign in to continue shopping</p>
                 </div>
 
-                <form method="POST" action="{{ route('login') }}" class="auth__form">
+                <form method="POST" action="{{ route('login.post') }}" class="auth__form">
                     @csrf
 
+                    @if ($errors->any())
+                        <div class="form__error-box">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>
+                                        <i class='bx bx-error-circle'></i>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
                     <div class="form__group">
-                        <div class="form__input-wrapper {{ $errors->has('email') ? 'error' : '' }}">
+                        <div class="form__input-wrapper">
                             <i class='bx bx-envelope'></i>
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required
                                 autocomplete="email" placeholder=" ">
                             <label for="email">Email Address</label>
                         </div>
-                        @error('email')
-                            <span class="form__error">
-                                <i class='bx bx-error-circle'></i>
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="form__group">
-                        <div class="form__input-wrapper {{ $errors->has('password') ? 'error' : '' }}">
+                        <div class="form__input-wrapper">
                             <i class='bx bx-lock-alt'></i>
                             <input type="password" id="password" name="password" required placeholder=" ">
                             <label for="password">Password</label>
@@ -44,12 +50,6 @@
                                 <i class='bx bx-hide'></i>
                             </button>
                         </div>
-                        @error('password')
-                            <span class="form__error">
-                                <i class='bx bx-error-circle'></i>
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="form__options">

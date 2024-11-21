@@ -19,6 +19,19 @@
                 <form method="POST" action="{{ route('register') }}" class="auth__form">
                     @csrf
 
+                    @if ($errors->any())
+                        <div class="form__error-box">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>
+                                        <i class='bx bx-error-circle'></i>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="form__group">
                         <div class="form__input-wrapper {{ $errors->has('name') ? 'error' : '' }}">
                             <i class='bx bx-user'></i>
@@ -26,12 +39,6 @@
                                 autocomplete="name" placeholder=" ">
                             <label for="name">Full Name</label>
                         </div>
-                        @error('name')
-                            <span class="form__error">
-                                <i class='bx bx-error-circle'></i>
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="form__group">
@@ -41,12 +48,6 @@
                                 autocomplete="email" placeholder=" ">
                             <label for="email">Email Address</label>
                         </div>
-                        @error('email')
-                            <span class="form__error">
-                                <i class='bx bx-error-circle'></i>
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="form__group">
@@ -58,12 +59,6 @@
                                 <i class='bx bx-hide'></i>
                             </button>
                         </div>
-                        @error('password')
-                            <span class="form__error">
-                                <i class='bx bx-error-circle'></i>
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="form__group">
@@ -85,12 +80,6 @@
                             <span class="label-text">I agree to the <a href="#" class="form__link">Terms &
                                     Conditions</a></span>
                         </label>
-                        @error('terms')
-                            <span class="form__error">
-                                <i class='bx bx-error-circle'></i>
-                                {{ $message }}
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="form__actions">
