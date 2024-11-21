@@ -7,7 +7,7 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
-//Landing Page Routes
+// Landing Page Routes (Accessible by all)
 Route::get('/', function () {
     return view('landing.landing-page');
 })->name('home');
@@ -20,56 +20,51 @@ Route::get('/cart', function () {
     return view('landing.shopping-cart');
 })->name('cart');
 
-//Auth Routes
-Route::get('/login', [AuthController::class, 'showloginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+// Auth Routes (Guest Only)
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.post');
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/search', function () {
-    return view('search');
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 });
-Route::get('/products', function () {
-    return view('products');
+
+// Authenticated User Routes
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // Admin Routes
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
 
-// Category Routes
-Route::prefix('categories')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('admin.categories.index');
-    Route::post('/', [CategoryController::class, 'store'])->name('admin.categories.store');
-    Route::put('/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
-    Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+    // Category Routes
+    Route::prefix('categories')->name('admin.categories.')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::post('/', [CategoryController::class, 'store'])->name('store');
+        Route::put('/{category}', [CategoryController::class, 'update'])->name('update');
+        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Product Routes
+    Route::prefix('products')->name('admin.products.')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::post('/', [ProductController::class, 'store'])->name('store');
+        Route::put('/{product}', [ProductController::class, 'update'])->name('update');
+        Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
+    });
+
+    // User Management
+    Route::prefix('users')->name('admin.users.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+    });
+
+    // Order Management
+    Route::prefix('orders')->name('admin.orders.')->group(function () {
+        Route::get('/', [OrdersController::class, 'index'])->name('index');
+        Route::patch('/{order}/status', [OrdersController::class, 'updateStatus'])->name('update-status');
+    });
 });
-
-// Product Routes
-Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('admin.products.index');
-    Route::post('/', [ProductController::class, 'store'])->name('admin.products.store');
-    Route::put('/{product}', [ProductController::class, 'update'])->name('admin.products.update');
-    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
-});
-
-// Users Management
-Route::prefix('users')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
-    Route::delete('/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-});
-
-// Order
-Route::prefix('orders')->group(function () {
-    Route::get('/', [OrdersController::class, 'index'])->name('admin.orders.index');
-    // Route::post('/', [OrdersController::class, 'store'])->name('admin.orders.store');
-    Route::patch('/{order}/status', [OrdersController::class, 'updateStatus'])->name('admin.orders.update-status ');
-    // Route::delete('/{order}', [OrdersController::class, 'destroy'])->name('admin.orders.destroy');
-});
-
-
-// Order History
