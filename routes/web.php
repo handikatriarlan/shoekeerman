@@ -37,33 +37,35 @@ Route::middleware('auth')->group(function () {
 
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::middleware('can:view dashboard')->group(function () {
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // Category Routes
-    Route::prefix('categories')->name('admin.categories.')->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('index');
-        Route::post('/', [CategoryController::class, 'store'])->name('store');
-        Route::put('/{category}', [CategoryController::class, 'update'])->name('update');
-        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
-    });
+        // Category Routes
+        Route::prefix('categories')->name('admin.categories.')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('index');
+            Route::post('/', [CategoryController::class, 'store'])->name('store');
+            Route::put('/{category}', [CategoryController::class, 'update'])->name('update');
+            Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+        });
 
-    // Product Routes
-    Route::prefix('products')->name('admin.products.')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('index');
-        Route::post('/', [ProductController::class, 'store'])->name('store');
-        Route::put('/{product}', [ProductController::class, 'update'])->name('update');
-        Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
-    });
+        // Product Routes
+        Route::prefix('products')->name('admin.products.')->group(function () {
+            Route::get('/', [ProductController::class, 'index'])->name('index');
+            Route::post('/', [ProductController::class, 'store'])->name('store');
+            Route::put('/{product}', [ProductController::class, 'update'])->name('update');
+            Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
+        });
 
-    // User Management
-    Route::prefix('users')->name('admin.users.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
-    });
+        // User Management
+        Route::prefix('users')->name('admin.users.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+        });
 
-    // Order Management
-    Route::prefix('orders')->name('admin.orders.')->group(function () {
-        Route::get('/', [OrdersController::class, 'index'])->name('index');
-        Route::patch('/{order}/status', [OrdersController::class, 'updateStatus'])->name('update-status');
+        // Order Management
+        Route::prefix('orders')->name('admin.orders.')->group(function () {
+            Route::get('/', [OrdersController::class, 'index'])->name('index');
+            Route::patch('/{order}/status', [OrdersController::class, 'updateStatus'])->name('update-status');
+        });
     });
 });

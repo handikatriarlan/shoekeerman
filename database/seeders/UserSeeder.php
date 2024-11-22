@@ -27,16 +27,25 @@ class UserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::create([
+            'name' => 'Arlan Tri Handika',
+            'email' => 'handikatriarlan@gmail.com',
+            'password' => Hash::make('123123123'),
+            'address' => 'Jl. Brigjend Katamso',
+            'phone' => '085260497808',
+            'role' => 'user',
+        ]);
+
         // Create 10 users
-        for ($i = 0; $i < 10; $i++) {
-            User::create([
-                'name' => $faker->name,
-                'email' => $faker->unique()->email,
-                'password' => Hash::make('password'),
-                'address' => $faker->address,
-                'phone' => $faker->phoneNumber,
-                'role' => 'user',
-            ]);
-        }
+        // for ($i = 0; $i < 10; $i++) {
+        //     User::create([
+        //         'name' => $faker->name,
+        //         'email' => $faker->unique()->email,
+        //         'password' => Hash::make('password'),
+        //         'address' => $faker->address,
+        //         'phone' => $faker->phoneNumber,
+        //         'role' => 'user',
+        //     ]);
+        // }
     }
 }
