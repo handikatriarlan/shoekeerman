@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\User\UserCartController;
+use App\Http\Controllers\User\UserShopController;
 use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\User\UserLandingController;
 use App\Http\Controllers\User\UserCheckoutController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\User\UserCheckoutController;
 */
 
 Route::get('/', [UserLandingController::class, 'index'])->name('home');
-Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop', [UserShopController::class, 'index'])->name('shop');
 Route::get('/cart', [UserCartController::class, 'index'])->name('cart');
 
 // Auth Routes
