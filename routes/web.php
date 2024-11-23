@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\User\UserCheckoutController;
 */
 
 Route::get('/', [UserLandingController::class, 'index'])->name('home');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/cart', [UserCartController::class, 'index'])->name('cart');
 
 // Auth Routes
